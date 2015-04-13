@@ -1,3 +1,3 @@
 require 'hestia'
 
-Hestia::Server.run!
+Hestia::Server.run!(Hestia::Option.load(ARGV))
