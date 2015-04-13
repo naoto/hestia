@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 
 module Hestia
   class Server < Sinatra::Base
@@ -8,10 +9,10 @@ module Hestia
     end
 
     get %r{/(.+)$} do
-      if !settings.plugins[params[:captures].first].nil?
-        settings.plugins[params[:captures].first].scrap
+      if settings.plugins.match?(params[:captures].first)
+        settings.plugins.scrap(params[:captures].first).to_json
       else
-        # TODO ここにエラー処理入れる
+        "{\"error\" => \"No Plugin Pattern\"}"
       end
     end
 

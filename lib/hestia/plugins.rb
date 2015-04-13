@@ -1,20 +1,20 @@
+require 'rinne'
+
 module Hestia
   class Plugins
 
     def initialize(plugin_dir)
-      @plugin_dir = plugin_dir
+      @plugins_dir = plugin_dir
       @plugins = []
       load_plugins
     end
 
-    def [](urlstr)
-      urls = URI.extract(urlstr)
-      if !urls.empty?
-        url = URI.parse(urls.first)
+    def match?(pattern)
+      !get_plugin(pattern).nil?
+    end
 
-      else
-        return nil
-      end
+    def scrap(pattern)
+      get_plugin(pattern).scrap(pattern)
     end
 
     private
@@ -25,6 +25,15 @@ module Hestia
          require "#{@plugins_dir}/#{file}"
          @plugins << Module.module_eval("#{class_name}.new")
        end
+     end
+
+     def get_plugin(pattern)
+       @plugins.each do |plugin|
+         if pattern =~ plugin.pattern
+           return plugin
+         end
+       end
+       return nil
      end
   end
 end
