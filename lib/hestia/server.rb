@@ -1,4 +1,3 @@
-require 'sinatra'
 require 'json'
 
 module Hestia
