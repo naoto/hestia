@@ -2,6 +2,9 @@ require "hestia/version"
 
 module Hestia
 
-  require 'hestia/server'
+  require 'sinatra'
+
   require 'hestia/plugins'
+  require 'hestia/server'
+
 end
