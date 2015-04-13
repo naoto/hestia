@@ -1,5 +1,3 @@
-require 'rinne'
-
 module Hestia
   class Plugins
 
