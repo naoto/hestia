@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
 
-# Specify your gem's dependencies in hestia.gemspec
-gemspec
+gem 'sinatra'
+gem 'rinne'
+gem 'nokogiri'
