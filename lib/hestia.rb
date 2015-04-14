@@ -1,10 +1,10 @@
-require "./lib/hestia/version"
+require "hestia/version"
 
 module Hestia
   require 'sinatra'
   require 'rinne'
 
-  require './lib/hestia/plugins'
-  require './lib/hestia/option'
-  require './lib/hestia/server'
+  require 'hestia/plugins'
+  require 'hestia/option'
+  require 'hestia/server'
 end

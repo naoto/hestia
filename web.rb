@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/hestia'
+require 'hestia'
 
 Hestia::Server.run!(Hestia::Option.load(ARGV))
