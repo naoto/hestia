@@ -1,3 +1,5 @@
+require 'optparse'
+
 module Hestia
   class Option < Hash
 
