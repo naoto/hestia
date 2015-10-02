@@ -21,7 +21,7 @@ class AnimeList
       on_air = []
       week = date.scan(/\(.*\)/).first
       if !week.nil?
-        on_air << week.gsub(/(\(|\))/, '')
+        on_air << "#{week.gsub(/(\(|\))/, '')}曜"
       end
       timelist = []
       time.each_line do |t|
