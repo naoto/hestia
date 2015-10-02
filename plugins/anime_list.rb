@@ -7,19 +7,29 @@ class AnimeList
 
   def initialize
     @pattern = /^(anime\/list)/
-    @url = "http://tv.yahoo.co.jp/tv_show/anime/"
+    @url = "http://www.kansou.me"
   end
 
   def scrap(args = nil)
     anime = []
-    Nokogiri::XML(open(@url).read).at("div.cont.all_list").search("li").each do |li|
-      dt = li.at("dt")
-      next if dt.nil?
-      title = dt.content
+    Nokogiri::XML(open(@url).read).at("table.list").search("tr").each do |li|
+      td = li.search("td")
+      next if td.nil? or td.empty?
+      title = td[1].content
+      date = td[0].content
+      time = td[2].content
       on_air = []
-      if li.at("dl").content =~ /(.曜)(\d{2}:\d{2})/
-        on_air = [$1, $2]
+      week = date.scan(/\(.*\)/).first
+      if !week.nil?
+        on_air << week.gsub(/(\(|\))/, '')
       end
+      timelist = []
+      time.each_line do |t|
+        if t.strip.include?(date.strip.gsub(/^\d+\//,''))
+          timelist << t.scan(/\d{2}:\d{2}/).first
+        end
+      end
+      on_air << timelist.sort.first
       anime << { title: title, onair: on_air }
     end
     anime
