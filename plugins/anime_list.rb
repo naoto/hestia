@@ -29,7 +29,10 @@ class AnimeList
           timelist << t.scan(/\d{2}:\d{2}/).first
         end
       end
-      on_air << timelist.sort.first
+      time = timelist.sort.first
+      if !time.nil?
+        on_air << time
+      end
       anime << { title: title, onair: on_air }
     end
     anime
